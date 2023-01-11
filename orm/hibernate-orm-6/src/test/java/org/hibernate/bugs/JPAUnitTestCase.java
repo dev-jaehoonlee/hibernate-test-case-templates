@@ -38,7 +38,7 @@ public class JPAUnitTestCase {
 		EntityGraph<?> entityGraph = entityManager.getEntityGraph("user-entity-graph");
 
 		Map<String, Object> properties = new HashMap<>();
-		properties.put("javax.persistence.fetchgraph", entityGraph);
+		properties.put("jakarta.persistence.fetchgraph", entityGraph);
 
 		User user = entityManager.find(User.class, id, properties);
 
@@ -56,7 +56,7 @@ public class JPAUnitTestCase {
 
 		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.name = :name", User.class)
 				.setParameter("name", name)
-				.setHint("javax.persistence.loadgraph", entityGraph);
+				.setHint("jakarta.persistence.loadgraph", entityGraph);
 
 		User user = query.getSingleResult();
 
