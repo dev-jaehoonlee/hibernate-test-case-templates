@@ -1,24 +1,20 @@
 package org.hibernate.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 import static java.text.MessageFormat.format;
 import static java.util.Objects.hash;
-import static java.util.stream.Collectors.joining;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @NamedEntityGraph(
         name = "user-entity-graph",
         attributeNodes = {
-                @NamedAttributeNode(value = "detail"),
-                @NamedAttributeNode(value = "skills")
+                @NamedAttributeNode(value = "detail")
         }
 )
 @Table(name = "users")
-@Entity(name = "User")
+@Entity
 public class User {
 
     @Id
@@ -31,9 +27,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", fetch = LAZY)
     private UserDetail detail;
-
-    @OneToMany(mappedBy = "user", fetch = LAZY)
-    private Set<UserSkill> skills = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,14 +52,6 @@ public class User {
         this.detail = detail;
     }
 
-    public Set<UserSkill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<UserSkill> skills) {
-        this.skills = skills;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -82,7 +67,6 @@ public class User {
 
     @Override
     public String toString() {
-        return format("User(id={0}, name={1}, detail={2}, skills=[{3}])",
-                id, name, detail, skills.stream().map(UserSkill::toString).collect(joining(", ")));
+        return format("User(id={0}, name={1}, detail={2}, skills=[{3}])", id, name, detail);
     }
 }

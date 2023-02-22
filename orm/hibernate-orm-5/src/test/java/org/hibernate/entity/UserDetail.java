@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Where(clause = "is_active = true")
 @Table(name = "user_details")
-@Entity(name = "UserDetail")
+@Entity
 public class UserDetail {
 
     @Id

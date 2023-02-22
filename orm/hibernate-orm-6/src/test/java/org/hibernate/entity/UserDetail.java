@@ -10,7 +10,7 @@ import static java.util.Objects.hash;
 
 @Where(clause = "is_active = true")
 @Table(name = "user_details")
-@Entity(name = "UserDetail")
+@Entity
 public class UserDetail {
 
     @Id
